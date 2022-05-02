@@ -29,10 +29,10 @@ class home_page {
     }
 
 
-    async searchBook(){
+    async searchBook(search_key = search_term){
         await this.searchBar.click();
 
-        await this.searchBar.setValue(search_term)
+        await this.searchBar.setValue(search_key)
         await this.searchBar.keys('Enter')
      
 
