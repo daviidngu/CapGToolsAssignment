@@ -1,8 +1,16 @@
 
 
 module.exports.login_details = {
-    "username": "fake@gmail.com",
-    "password": "fake_password"
+    "username": "bibqmgvdtoanjfmtea@kvhrr.com",
+    "password": "Dragonshehe69!!!"
 };
 
-module.exports.base_url = 'https://www.amazon.com.au/';
+module.exports.invalid_login_details = {
+    "username": "fake@email",
+    "password": "fakepassword"
+};
+
+module.exports.base_url = 'https://www.kmart.com.au/';
+
+
+module.exports.search_term = 'Harry Potter and the Philosophers stone';

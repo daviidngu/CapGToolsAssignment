@@ -1,33 +1,42 @@
 
 const user_details = require("../test_configs").login_details;
+
+const invalid_user_details = require("../test_configs").invalid_login_details;
 class signIn_page {
 
 
 
     get inputEmail () {
-        return $('#ap_email');
-    }
-
-    get continue(){
-        return $('#continue');
+        return $('#emailLogin');
     }
 
     get inputPassword () {
-        return $('#ap_password');
+        return $('#password');
 
     }
 
-    get sign_in_submit_btn(){
-        return $('#signInSubmit');
+    get invalid_login_message(){
+        return $("#error-message")
+
+    }
+
+    get signInbtn(){
+        return $('#sign-in-btn');
     }
 
     async login (username, password) {
 
         await this.inputEmail.setValue(user_details.username);
-        await this.continue.click();
-
         await this.inputPassword.setValue(user_details.password);
-        await this.sign_in_submit_btn.click();
+        await this.signInbtn.click();
+
+    }
+
+    async invalid_login (username, password) {
+
+        await this.inputEmail.setValue(invalid_user_details.username);
+        await this.inputPassword.setValue(invalid_user_details.password);
+        await this.signInbtn.click();
 
     }
 
