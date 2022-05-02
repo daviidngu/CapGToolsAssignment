@@ -21,9 +21,10 @@ describe('Log in to Amazon', () => {
 
 */
 
+
 describe('API GET request', () => {
     const API_Base_URL = "https://reqres.in/api/users"
-    
+
     it('successful GET request with query param', async () => {
         const page_num = 2
         const query_param = "?page="+String(page_num)
@@ -49,3 +50,38 @@ describe('API GET request', () => {
 
     
 });
+
+
+describe('API POST request', () => {
+    const API_Post_url = "https://reqres.in/api/register"
+    
+    it('Successful POST request', async () => {
+        const data= {
+            "email": "eve.holt@reqres.in",
+            "password": "pistol"
+        }
+        const response = await fetch(API_Post_url,{
+                                    method: "POST",
+                                    headers: {'Content-Type': 'application/json'},
+                                    body: JSON.stringify(data)});
+
+        expect(response.status).to.equal(200);
+    });
+
+
+    it('Unsuccessful POST request', async () => {
+        const data= {
+            "email": "eve.holt@reqres.in",
+        }
+        const response = await fetch(API_Post_url,{
+                                    method: "POST",
+                                    headers: {'Content-Type': 'application/json'},
+                                    body: JSON.stringify(data)});
+
+        expect(response.status).to.equal(400);
+    });
+
+    
+});
+
+
