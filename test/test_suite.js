@@ -5,6 +5,7 @@ const myAccount_page = require("./page_objects/myAccount_page");
 const searchResults_page = require("./page_objects/searchResults_page");
 const product_page = require("./page_objects/product_page");
 const fetch = require('node-fetch');
+const csv = require("csvtojson")
 const assert = require('chai').assert
 const expectChai = require('chai').expect
 const base_url = require("./test_configs").base_url
@@ -44,6 +45,34 @@ describe('Log in to Kmart', () => {
         
     });
 
+    
+    it('order books from a JSON file', async () => {
+        
+        await home_page.open_home_page();
+        const books = require("./More_books/example_books.json");
+        for(let i = 0; i < books.length; i++){
+            await home_page.searchBook(books[i]);
+            await searchResults_page.navToFirstProd();
+            await product_page.addToCart();
+            await home_page.open_home_page();
+        };
+    });
+        
+
+
+    it('order books from a CSV file', async () => {
+        
+        await home_page.open_home_page();
+        const books = await csv().fromFile("./test/More_books/booksCSV.csv")
+        for(let i = 0; i < books.length; i++){
+            await home_page.searchBook(books[i]["Book Title"]);
+            await searchResults_page.navToFirstProd();
+            await product_page.addToCart();
+            await home_page.open_home_page();
+        }
+          
+        
+    });
 
 });
 
