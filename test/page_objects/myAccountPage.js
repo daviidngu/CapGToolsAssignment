@@ -1,8 +1,7 @@
 
 
 
-
-class myAccount_page{
+class myAccountPage{
 
     get accountHeader(){
         return $('=My account');
@@ -12,4 +11,4 @@ class myAccount_page{
 }
 
 
-module.exports = new myAccount_page();
+module.exports = new myAccountPage();
