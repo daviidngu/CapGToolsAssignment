@@ -1,5 +1,6 @@
 
 const click = require('../Utilities').click
+const searchTerm = require("../testConfigs").searchTerm
 
 class bagPage{
 
@@ -13,14 +14,17 @@ class bagPage{
         catch{}
             
     }
+
+
     get deleteBtn(){
-        return $('//*[@id="tabpanel-0"]/div/div/ul/li[1]/div/div[4]/button')
+        return $('[data-testid=deleteButton]')
     }             
     async deleteOne(){
         await click(this.deleteBtn)
     }
+
+
     async clearBag(){
-        await this.removeOutOfStock()
         
         while(true){
             try{
@@ -30,8 +34,20 @@ class bagPage{
                break
            }
         }
+        
     }
 
+    async getItem(item = searchTerm){
+        var selector = 'span*='+item;
+        return $(selector);
+    }
+
+    
+
+    get emptyBagMsg(){
+        return $('h1=No items currently in your bag. Let’s get shopping!')
+    }
+    
 
 }
 

@@ -1,10 +1,12 @@
+const { openBrowser } = require('../Utilities');
 
 const click = require('../Utilities').click
 class searchResultsPage{
 
 
     get firstResult(){
-        return $('//*[@id="__next"]/div/main/div[2]/div/ul/li[1]/div/div[1]');
+        return $('[data-testid=product-link]');
+
 
 
     };
@@ -12,9 +14,11 @@ class searchResultsPage{
 
 
     async navToFirstProd(){
+        //Try block to catch Target frame error
+        try{
         await click(this.firstResult);
-        
-
+        }
+        catch{}
     };
 };
 

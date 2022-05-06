@@ -10,8 +10,12 @@ const assert = require('chai').assert
 const expect = require('chai').expect
 const csv = require("csvtojson")
 async function makeRequest() {
-  const books = await csv().fromFile("./test/More_books/booksCSV.csv")
-  console.log(books[1]["Book Title"])
+  var books = require("./test/More_books/exampleBooks.json")
+  for(var i=0; i<books.length;i++){
+    console.log(books[i])
+
+  }
+  
   
 }
 makeRequest();
