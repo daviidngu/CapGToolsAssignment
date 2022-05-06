@@ -36,20 +36,13 @@ class homePage {
 
 
 
-    get searchExecute(){
-        return $('[role = button]');
-    }
+
 
 
     async searchBook(searchKey = searchTerm){
         await click(this.searchBar);
         await textInput(this.searchBar, [searchKey, 'Enter'])
-        //await this.searchBar.keys('Enter')
-        
-     
-
-        
-
+   
 
     }
 

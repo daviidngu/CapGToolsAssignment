@@ -6,11 +6,11 @@ module.exports.loginDetails = {
 };
 
 module.exports.invalidLoginDetails = {
-    "username": "fake@email",
+    "username": "fake@email.com",
     "password": "fakepassword"
 };
 
 module.exports.baseUrl = 'https://www.kmart.com.au/';
 
 
-module.exports.searchTerm = 'Harry Potter and the Philosophers stone';
+module.exports.searchTerm = 'Harry Potter and The Philosopher\'s Stone';

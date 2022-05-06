@@ -7,7 +7,8 @@ const productPage = require("./page_objects/productPage");
 const bagPage = require("./page_objects/bagPage");
 const closeBrowser = require('./utilities').closeBrowser
 const fetch = require('node-fetch');
-const csv = require("csvtojson")
+const csv = require("csvtojson");
+const { getItem } = require("./page_objects/bagPage");
 const assert = require('chai').assert
 const expectChai = require('chai').expect
 const baseUrl = require("./testConfigs").baseUrl
@@ -29,7 +30,7 @@ describe('Log into Kmart fail', () => {
 });
 
 describe('Log into Kmart kmart and order books', () => {   
-
+    
     it('should login with valid credentials', async () => {
         await homePage.openHomePage();
         await homePage.navToSignIn();
@@ -47,7 +48,14 @@ describe('Log into Kmart kmart and order books', () => {
         await homePage.searchBook();
         await searchResultsPage.navToFirstProd();
         await productPage.addToCart();
+
+        //Book should be in bag
+        await homePage.openHomePage();
+        await homePage.navToBag()
+        await expect(bagPage.getItem()).toExist()
         
+        //Restart back to home
+        await homePage.openHomePage();
         
         
     });
@@ -58,9 +66,17 @@ describe('Log into Kmart kmart and order books', () => {
         await homePage.openHomePage();
         const books = require("./More_books/exampleBooks.json");
         for(let i = 0; i < books.length; i++){
-            await homePage.searchBook(books[i]);
+            var selectedBook = books[i];
+            await homePage.searchBook(selectedBook);
             await searchResultsPage.navToFirstProd();
             await productPage.addToCart();
+           
+            //Book should be in bag
+            await homePage.openHomePage();
+            await homePage.navToBag()
+            await expect(bagPage.getItem(selectedBook)).toExist()
+
+            //Restart back to home
             await homePage.openHomePage();
         };
     });
@@ -75,6 +91,14 @@ describe('Log into Kmart kmart and order books', () => {
             await homePage.searchBook(books[i]["Book Title"]);
             await searchResultsPage.navToFirstProd();
             await productPage.addToCart();
+
+            //Book should be in bag
+            await homePage.openHomePage();
+            await homePage.navToBag()
+            await expect(bagPage.getItem(books[i]["Book Title"])).toExist()
+
+
+            //Restart back to home
             await homePage.openHomePage();
         }
     });
@@ -90,6 +114,12 @@ describe('Clear bag', () => {
         await homePage.openHomePage();
         await homePage.navToBag();
         await bagPage.clearBag();
+
+
+        //Bag should be clear
+        await expect(bagPage.emptyBagMsg).toBeDisplayed();
+
+        //Restart back to home
         await homePage.openHomePage();
           
         
