@@ -23,17 +23,17 @@ class bagPage{
         await click(this.deleteBtn)
     }
 
+    get getBagSize(){
+        return $('[data-testid=bagItems]').$$('li').length
+    }
 
     async clearBag(){
         
-        while(true){
-            try{
+        const bagSize = await this.getBagSize
+
+        for(let i = 0; i < bagSize; i++){
             await this.deleteOne();
-            }
-           catch(err){
-               break
-           }
-        }
+        };
         
     }
 
@@ -45,7 +45,7 @@ class bagPage{
     
 
     get emptyBagMsg(){
-        return $('h1=No items currently in your bag. Let’s get shopping!')
+        return $('[data-testid=empty-msg]')
     }
     
 
