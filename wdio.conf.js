@@ -1,4 +1,26 @@
+
+const { Reporter } = require('@reportportal/agent-js-webdriverio');
+
+
+const reportConfig = {
+    token: '6bae8e41-8353-4c8a-9e01-27020b0b2fce',
+    endpoint: 'http://localhost:8080/api/v1',
+    project: 'sampleproj',
+    launch: 'superadmin_TEST_EXAMPLE',
+    mode: 'DEFAULT',
+    debug: false,
+    description: "Static launch description",
+    attributes: [{ key: 'key', value: 'value' }, { value: 'value' }],
+    attachPicturesToLogs: true,
+    rerun: false,
+    rerunOf: 'launchUuid of already existed launch', 
+    cucumberNestedSteps: false,
+    skippedIssue: true,
+  };
+
 exports.config = {
+
+    
     //
     // ====================
     // Runner Configuration
@@ -132,7 +154,8 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec'],
+    reporterSyncInterval: 10 * 1000, // in ms. default 5000
+    reporters: ['spec', [Reporter, reportConfig]],
 
 
     
@@ -291,3 +314,9 @@ exports.config = {
     // onReload: function(oldSessionId, newSessionId) {
     // }
 }
+
+
+
+
+
+

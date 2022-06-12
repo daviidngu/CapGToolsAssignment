@@ -14,7 +14,7 @@ const expectChai = require('chai').expect
 const baseUrl = require("./testConfigs").baseUrl
 
 
-
+/*
 describe('Log into Kmart fail', () => {
     
     it('should not login - invalid login', async () => {
@@ -140,7 +140,7 @@ describe('Close Window', () => {
     
 
 });
-
+*/
 
 describe('API GET request', () => {
     const APIBaseURL = "https://reqres.in/api/users"
